@@ -5,17 +5,26 @@ class Launcher
         var options = {
             bodyA: body,
             pointB: pointB,
-            stiffness: 0.2,
-            length: 10
+            stiffness: 0.04,
+            length: 15
         }
         this.pointB = pointB;
         this.launcher = Constraint.create(options);
         World.add(world, this.launcher);
     }
+
+    fly()
+    {
+        this.launcher.bodyA = null;
+    }
+
     display()
     {
-        strokeWeight(4);
-        stroke(255);
-        line(this.launcher.bodyA.position.x, this.launcher.bodyA.position.y, this.pointB.x, this.pointB.y);
+        if(this.launcher.bodyA)
+        {
+            strokeWeight(4);
+            stroke(255);
+            line(this.launcher.bodyA.position.x, this.launcher.bodyA.position.y, this.pointB.x, this.pointB.y);
+        }
     }
 }

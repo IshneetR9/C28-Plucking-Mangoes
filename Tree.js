@@ -5,15 +5,15 @@ class Tree
         var options = {
             isStatic: true
         }
-        this.tree = Bodies.rectangle(x, y, width, height, options);
+        this.body = Bodies.rectangle(x, y, width, height, options);
         this.width = width;
         this.height = height;
-        World.add(world, this.tree);
+        World.add(world, this.body);
     }
     display()
     {
         fill(0);
         rectMode(CENTER);
-        rect(this.tree.position.x, this.tree.position.y, this.width, this.height);
+        rect(this.body.position.x, this.body.position.y, this.width, this.height);
     }
 }

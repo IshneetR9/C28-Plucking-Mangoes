@@ -33,7 +33,7 @@ function setup() {
 	ground = new Ground(600, 680, 1200, 20);
 
 	//creating the stone
-	stone = new Stone(140, 535, 30);
+	stone = new Stone(230, 530, 30);
 
 	//creating mangoes
 	mango1 = new Mango(730, 130, 30);
@@ -47,10 +47,9 @@ function setup() {
 	mango9 = new Mango(1050, 250, 30);
 
 	//creating constraint
-	launcherOb = new Launcher(stone.body, {x:140, y:535});
+	launcherOb = new Launcher(stone.body, {x:230, y:530}); 
 
 	Engine.run(engine);
-	
 }
 
 
@@ -69,7 +68,7 @@ function draw() {
   stone.display();
 
   launcherOb.display();
-
+  
   mango1.display();
   mango2.display();
   mango3.display();
@@ -80,8 +79,34 @@ function draw() {
   mango8.display();
   mango9.display();
 
+  detectCollision(stone, mango1);
+  detectCollision(stone, mango2);
+  detectCollision(stone, mango3);
+  detectCollision(stone, mango4);
+  detectCollision(stone, mango5);
+
   
 }
 
+function mouseDragged()
+{
+	Matter.Body.setPosition(stone.body, {x:mouseX, y:mouseY});
+}
 
+function mouseReleased()
+{
+	launcherOb.fly();
+}
 
+function detectCollision(stoneOb, mangoOb)
+{
+	var stoneBodyPos = stoneOb.body.position
+	var mangoBodyPos = mangoOb.body.position
+	
+	var distance = dist(mangoBodyPos.x, mangoBodyPos.y, stoneBodyPos.x, stoneBodyPos.y)
+
+	if(distance <= stoneOb.r+mangoOb.r)
+	{
+		Matter.Body.setStatic(mangoOb.body, false);
+	}
+}
