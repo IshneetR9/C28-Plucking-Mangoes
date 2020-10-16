@@ -18,6 +18,11 @@ class Launcher
         this.launcher.bodyA = null;
     }
 
+    attach(body)
+    {
+        this.launcher.bodyA = body;
+    }
+
     display()
     {
         if(this.launcher.bodyA)

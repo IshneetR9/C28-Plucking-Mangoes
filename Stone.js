@@ -8,6 +8,9 @@ class Stone
             friction: 1,
             density: 1.2
         }
+        this.x = x;
+        this.y = y;
+        this.r=r;
         this.body = Bodies.circle(x, y, r, options);
         this.width = r;
         this.height = r;

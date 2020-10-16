@@ -24,11 +24,6 @@ function setup() {
 	engine = Engine.create();
 	world = engine.world;
 
-	//Creating the tree
-	treeleft = new Tree(700, 520, 20, 300);
-	treebottom = new Tree(900, 670, 400, 20);
-	treeright = new Tree(1100, 520, 20, 300);
-
 	//creating the ground
 	ground = new Ground(600, 680, 1200, 20);
 
@@ -56,10 +51,6 @@ function setup() {
 function draw() {
   background(0);
   drawSprites();
- 
-  treeleft.display();
-  treeright.display();
-  treebottom.display();
 
   ground.display();
 
@@ -84,7 +75,10 @@ function draw() {
   detectCollision(stone, mango3);
   detectCollision(stone, mango4);
   detectCollision(stone, mango5);
-
+  detectCollision(stone, mango6);
+  detectCollision(stone, mango7);
+  detectCollision(stone, mango8);
+  detectCollision(stone, mango9);
   
 }
 
@@ -98,12 +92,18 @@ function mouseReleased()
 	launcherOb.fly();
 }
 
+function keyPressed()
+{
+	if(keyCode === 32)
+	{
+		Matter.Body.setPosition(stone.body, {x:230, y:530}) 
+		launcherOb.attach(stone.body);
+	}
+}
+
 function detectCollision(stoneOb, mangoOb)
 {
-	var stoneBodyPos = stoneOb.body.position
-	var mangoBodyPos = mangoOb.body.position
-	
-	var distance = dist(mangoBodyPos.x, mangoBodyPos.y, stoneBodyPos.x, stoneBodyPos.y)
+	var distance = dist(mangoOb.body.position.x, mangoOb.body.position.y, stoneOb.body.position.x, stoneOb.body.position.y)
 
 	if(distance <= stoneOb.r+mangoOb.r)
 	{
